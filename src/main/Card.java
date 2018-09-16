@@ -2,6 +2,7 @@ package main;
 
 public class Card {
     private CardValue value;
+    private Suit suit;
     /*
         String will be in format: AH
         A = Ace = Value
@@ -9,10 +10,15 @@ public class Card {
      */
     public Card(String card) {
         this.value = CardValue.lookupByAbbreviation(card.substring(0,card.length()-1));
+        this.suit = Suit.valueOf(card.substring(card.length()-1));
     }
 
     public CardValue getValue(){
         return this.value;
+    }
+
+    public Suit getSuit(){
+        return this.suit;
     }
 
     public enum CardValue{
@@ -49,6 +55,19 @@ public class Card {
 
             // Abbreviation not found
             return null;
+        }
+    }
+
+    public enum Suit{
+        H ("Hearts"),
+        D ("Diamonds"),
+        C ("Clubs"),
+        S ("Spades");
+
+        private String name;
+
+        Suit(String name) {
+            this.name = name;
         }
     }
 }
