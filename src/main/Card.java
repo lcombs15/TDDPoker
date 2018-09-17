@@ -1,6 +1,6 @@
 package main;
 
-public class Card {
+public class Card implements Comparable<Card> {
     private CardValue value;
     private Suit suit;
 
@@ -25,20 +25,39 @@ public class Card {
         return this.suit;
     }
 
+    // Comparing only uses value
+    @Override
+    public int compareTo(Card that) {
+        return this.value.compareTo(that.value);
+    }
+
+    // Determining if two cards are identical requires suit and value
+    @Override
+    public boolean equals(Object that) {
+        // Only cards are compared to cards
+        if (that instanceof Card) {
+            Card thatCard = (Card) that;
+            return this.value.equals(thatCard.value) && this.suit.equals(thatCard.suit);
+        } else {
+            return false;
+        }
+    }
+
+
     public enum CardValue {
-        TWO("2"),
-        THREE("3"),
-        FOUR("4"),
-        FIVE("5"),
-        SIX("6"),
-        SEVEN("7"),
-        EIGHT("8"),
-        NINE("9"),
-        TEN("10"),
-        JACK("J"),
-        QUEEN("Q"),
+        ACE("A"),
         KING("K"),
-        ACE("A");
+        QUEEN("Q"),
+        JACK("J"),
+        TEN("10"),
+        NINE("9"),
+        EIGHT("8"),
+        SEVEN("7"),
+        SIX("6"),
+        FIVE("5"),
+        FOUR("4"),
+        THREE("3"),
+        TWO("2");
 
         // Store the above "A", "8", "K", ext.
         private String abbreviation;
@@ -73,5 +92,15 @@ public class Card {
         Suit(String name) {
             this.name = name;
         }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return this.value.name() + " of " + this.suit.toString();
     }
 }
