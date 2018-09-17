@@ -12,6 +12,9 @@ public class Card {
     public Card(String card) {
         this.value = CardValue.lookupByAbbreviation(card.substring(0, card.length() - 1));
         this.suit = Suit.valueOf(card.substring(card.length() - 1));
+
+        if (this.value == null || this.suit == null)
+            throw new IllegalArgumentException("Invalid card string: " + card);
     }
 
     public CardValue getValue() {
