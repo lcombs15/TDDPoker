@@ -16,7 +16,7 @@ public class HandTest {
     }
 
     @Test
-    public void test_hand_creation_from_string() {
+    public void givenValidHandString_whenPassedToConstructor_HandObjectIsNotNull() {
         SUT = new Hand("2H 4S 4C 2D 4H");
         assertTrue(SUT != null);
     }
@@ -35,21 +35,21 @@ public class HandTest {
     }
 
     @Test
-    public void whenHandStringNull_givenHandConstructor_throwIllegalArgumentException() {
+    public void givenHandStringNull_whenPassedToConstructor_throwIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> {
             SUT = new Hand(null);
         });
     }
 
     @Test
-    public void whenCorrectLengthHandStringContainsInvalidCard_givenHandConstructor_throwIllegalArgumentException() {
+    public void givenCorrectLengthHandStringContainsInvalidCard_whenPassedToHandConstructor_throwIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> {
             SUT = new Hand("2H 8R 2S AS AD");
         });
     }
 
     @Test
-    public void test_high_card_in_hand() {
+    public void givenValidHandWithHighCardAceSpades_whenGetHighCardCalled_returnAceSpades() {
         SUT = new Hand("2H 2D 5C 2S AS");
         assertEquals(SUT.getHighCard(), new Card("AS"));
     }
