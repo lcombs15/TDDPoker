@@ -15,24 +15,24 @@ public class CardTest {
     }
 
     @Test
-    void test_card_value_from_string_constructor() {
+    void givenAce_whenGetValueCalled_returnsAce() {
         assertEquals(SUD.getValue(), Card.CardValue.ACE);
     }
 
     @Test
-    void test_card_suit_from_string_constructor() {
+    void givenHeartsSuit_whenGetSuitCalled_returnsHearts() {
         assertEquals(SUD.getSuit(), Card.Suit.H);
     }
 
     @Test
-    void test_invalid_suit_and_value_card_string_to_constructor() {
+    void givenInvalidCardStringFormat_whenPassedToConstructor_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> {
-            SUD = new Card("INVALID");
+            SUD = new Card("Ace of Spades");
         });
     }
 
     @Test
-    void test_invalid_value_card_string_to_constructor() {
+    void givenValidCardStringFormatWithInvalidCardValue_WhenPassedToConstructor_throwsIllegalArgumentException() {
         // The "One of hearts" doesn't exist
         assertThrows(IllegalArgumentException.class, () -> {
             SUD = new Card("1H");
@@ -40,7 +40,7 @@ public class CardTest {
     }
 
     @Test
-    void test_invalid_suit_card_string_to_constructor() {
+    void givenValidCardStringFormatWithInvalidSuit_WhenPassedToConstructor_throwsIllegalArgumentException() {
         // The "King of L's" doesn't exist
         assertThrows(IllegalArgumentException.class, () -> {
             SUD = new Card("KL");
