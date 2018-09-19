@@ -1,5 +1,6 @@
 package main;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Hand {
@@ -22,5 +23,27 @@ public class Hand {
     public Card getHighCard() {
         Arrays.sort(cards);
         return cards[0];
+    }
+
+    public boolean isTwoOfKind() {
+        // Populate list of all card values
+        ArrayList<Card.CardValue> cardValues = new ArrayList();
+
+        for(Card cardInHand : cards)
+            cardValues.add(cardInHand.getValue());
+
+        // Loop through first n - 1 cards (card n has an obvious lastIndexOf)
+        int i = 0;
+        boolean isTwoOfKind = false;
+        while(i < cardValues.size() -1 && !isTwoOfKind){
+            // If there exists another occurrence of this card value in hand
+            if(cardValues.lastIndexOf(cardValues.get(i)) != i) {
+                isTwoOfKind = true;
+            }
+
+            i++;
+        }
+
+        return isTwoOfKind;
     }
 }

@@ -53,4 +53,16 @@ public class HandTest {
         SUT = new Hand("2H 2D 5C 2S AS");
         assertEquals(SUT.getHighCard(), new Card("AS"));
     }
+
+    @Test
+    public void givenHandWithTwoEqualValueCards_whenHasTwoOfKindCalled_thenTrue(){
+        SUT = new Hand("4C 5H 2D AS AH");
+        assertTrue(SUT.isTwoOfKind());
+    }
+
+    @Test
+    public void givenHandWithUniqueValueCards_whenIsTwoOfKindCalled_thenFalse(){
+        SUT = new Hand("AS KH 4C 5H 2D");
+        assertFalse(SUT.isTwoOfKind());
+    }
 }
