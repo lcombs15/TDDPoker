@@ -115,4 +115,16 @@ public class HandTest {
         SUT = new Hand("AS 2H AC AD 3H");
         assertFalse(SUT.isStraight());
     }
+
+    @Test
+    void givenHandWithAllHearts_whenIsFlushCalled_thenTrue(){
+        SUT = new Hand("AH 2H KH 4H JH");
+        assertTrue(SUT.isFlush());
+    }
+
+    @Test
+    void givenHandWithAllHeartsWithOneClub_whenIsFlushCalled_thenFalse(){
+        SUT = new Hand("AH 2H KH 4H JC");
+        assertFalse(SUT.isFlush());
+    }
 }

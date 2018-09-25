@@ -81,4 +81,23 @@ public class Hand {
 
         return isStraight;
     }
+
+    public boolean isFlush() {
+        // Assume hand to be a flush
+        boolean isFlush = true;
+
+        // Save first suit in hand
+        Card.Suit flushSuit = cards[0].getSuit();
+
+        // Index 0 is given, Loop through hand up to n-1, verify that all suits are flushSuit
+        int indexToCheck = 1;
+        while (isFlush && indexToCheck < cards.length) {
+            // Not a valid flush if different suit
+            if (!cards[indexToCheck].getSuit().equals(flushSuit))
+                isFlush = false;
+            indexToCheck++;
+        }
+
+        return isFlush;
+    }
 }
