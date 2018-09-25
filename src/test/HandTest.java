@@ -1,5 +1,6 @@
 package test;
 
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import main.Card;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -51,7 +52,7 @@ public class HandTest {
     @Test
     public void givenValidHandWithHighCardAceSpades_whenGetHighCardCalled_returnAceSpades() {
         SUT = new Hand("2H 2D 5C 2S AS");
-        assertEquals(SUT.getHighCard(), new Card("AS"));
+        assertEquals(new Card("AS"),SUT.getHighCard());
     }
 
     @Test
@@ -64,5 +65,11 @@ public class HandTest {
     public void givenHandWithUniqueValueCards_whenIsTwoOfKindCalled_thenFalse(){
         SUT = new Hand("AS KH 4C 5H 2D");
         assertFalse(SUT.isTwoOfKind());
+    }
+
+    @Test
+    public void givenHandSortedByCardValueDesc_whenIsStraightCalled_thenTrue(){
+        SUT = new Hand("AS QD 10H 4C 2S");
+        assertTrue(SUT.isStraight());
     }
 }

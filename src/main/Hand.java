@@ -22,7 +22,7 @@ public class Hand {
 
     public Card getHighCard() {
         Arrays.sort(cards);
-        return cards[0];
+        return cards[cards.length-1];
     }
 
     public boolean isTwoOfKind() {
@@ -45,5 +45,18 @@ public class Hand {
         }
 
         return isTwoOfKind;
+    }
+
+    public boolean isStraight() {
+        int i = 0;
+        boolean isStraight = true;
+        while(i < cards.length - 1 && isStraight){
+            if(cards[i].compareTo(cards[i+1]) < 1){
+                isStraight = false;
+            }
+            i++;
+        }
+
+        return isStraight;
     }
 }
