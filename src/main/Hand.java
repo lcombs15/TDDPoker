@@ -49,6 +49,9 @@ public class Hand {
     }
 
     public boolean isStraight() {
+        if (isTwoOfKind())
+            return false;
+
         // Put cards in order
         Arrays.sort(this.cards);
 
