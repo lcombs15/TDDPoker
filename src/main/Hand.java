@@ -48,13 +48,30 @@ public class Hand {
     }
 
     public boolean isStraight() {
+        // Put cards in order
+        Arrays.sort(this.cards);
+
+        // Possible card values
+        Card.CardValue cardValues[] = Card.CardValue.values();
+
+        // Find first cards values index
         int i = 0;
-        boolean isStraight = true;
-        while(i < cards.length - 1 && isStraight){
-            if(cards[i].compareTo(cards[i+1]) < 1){
-                isStraight = false;
-            }
+        int firstCardValueIndex = -1;
+        while(firstCardValueIndex < 0){
+            if (this.cards[0].getValue().equals(cardValues[i]))
+                firstCardValueIndex = i;
             i++;
+        }
+
+        // Make sure we have enough consecutive cards remaining
+        if (cardValues.length - firstCardValueIndex < this.cards.length){
+            return false;
+        }
+
+        // Verify that hand card values are consecutive
+        boolean isStraight = false;
+        for (int j = 1; j < this.cards.length; j++){
+            isStraight = this.cards[j].getValue().equals(cardValues[j + firstCardValueIndex]);
         }
 
         return isStraight;

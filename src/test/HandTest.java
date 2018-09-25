@@ -1,6 +1,5 @@
 package test;
 
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import main.Card;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -67,9 +66,8 @@ public class HandTest {
         assertFalse(SUT.isTwoOfKind());
     }
 
-    @Test
-    public void givenHandSortedByCardValueDesc_whenIsStraightCalled_thenTrue(){
-        SUT = new Hand("AS QD 10H 4C 2S");
+    @Test void givenStraightHandWithoutAce_whenIsStraightCalled_thenTrue(){
+        SUT = new Hand("AS QD KC JH 10D");
         assertTrue(SUT.isStraight());
     }
 }
