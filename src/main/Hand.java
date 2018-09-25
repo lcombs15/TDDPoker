@@ -27,7 +27,15 @@ public class Hand {
         return cards[cards.length - 1];
     }
 
-    public boolean isTwoOfKind() {
+    public boolean isPair() {
+        return numPairs() > 0;
+    }
+
+    public boolean isTwoPair() {
+        return numPairs() > 1;
+    }
+
+    private int numPairs() {
         // Populate list of all card values
         ArrayList<CardValue> cardValues = new ArrayList();
 
@@ -36,22 +44,22 @@ public class Hand {
 
         // Loop through first n - 1 cards (card n has an obvious lastIndexOf)
         int i = 0;
-        boolean isTwoOfKind = false;
-        while (i < cardValues.size() - 1 && !isTwoOfKind) {
+        int pairs = 0;
+        while (i < cardValues.size() - 1) {
             // If there exists another occurrence of this card value in hand
             if (cardValues.lastIndexOf(cardValues.get(i)) != i) {
-                isTwoOfKind = true;
+                pairs++;
             }
 
             i++;
         }
 
-        return isTwoOfKind;
+        return pairs;
     }
 
     public boolean isStraight() {
         // Any hand with two of a kind cannot be a straight
-        if (isTwoOfKind())
+        if (isPair())
             return false;
 
         // Put hand in order
@@ -99,5 +107,49 @@ public class Hand {
         }
 
         return isFlush;
+    }
+
+    public enum Score {
+        HighCard,
+        Pair,
+        TwoPair,
+        ThreeOfKind,
+        Straight,
+        Flush,
+        FullHouse,
+        FourOfKind,
+        StraightFlush
+    }
+
+    public Score getScore() {
+        if (isFlush()) {
+            return Score.Flush;
+        } else if (isStraight()) {
+            return Score.Straight;
+        } else if (isThreeOfKind()) {
+            return Score.ThreeOfKind;
+        } else if (isTwoPair()) {
+            return Score.TwoPair;
+        } else if (isPair()) {
+            return Score.Pair;
+        } else {
+            return Score.HighCard;
+        }
+    }
+
+    private boolean isThreeOfKind() {
+        ArrayList<Integer> nums = new ArrayList<>();
+        boolean isThreeOfKind = false;
+        int i = 0;
+        while (!isThreeOfKind && i < cards.length - 2) {
+            int count = 1;
+            for (int j = i + 1; j < cards.length; j++) {
+                if (cards[j].getValue().equals(cards[i].getValue()))
+                    count++;
+            }
+            isThreeOfKind = count >= 3;
+            i++;
+        }
+        return isThreeOfKind;
     }
 }
