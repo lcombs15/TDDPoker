@@ -1,6 +1,7 @@
 package main;
 
-import java.lang.reflect.Array;
+import main.Card.CardValue;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -8,12 +9,12 @@ public class Hand {
     Card cards[] = new Card[5];
 
     public Hand(String hand) {
-        if(hand == null)
+        if (hand == null)
             throw new IllegalArgumentException("Hand string cannot be null");
 
         String cardStrings[] = hand.split(" ");
 
-        if(cardStrings.length != 5)
+        if (cardStrings.length != 5)
             throw new IllegalArgumentException("Hand string must contain 5 cards. Given: " + hand);
 
         for (int i = 0; i < cardStrings.length; i++) {
@@ -23,22 +24,22 @@ public class Hand {
 
     public Card getHighCard() {
         Arrays.sort(cards);
-        return cards[cards.length-1];
+        return cards[cards.length - 1];
     }
 
     public boolean isTwoOfKind() {
         // Populate list of all card values
-        ArrayList<Card.CardValue> cardValues = new ArrayList();
+        ArrayList<CardValue> cardValues = new ArrayList();
 
-        for(Card cardInHand : cards)
+        for (Card cardInHand : cards)
             cardValues.add(cardInHand.getValue());
 
         // Loop through first n - 1 cards (card n has an obvious lastIndexOf)
         int i = 0;
         boolean isTwoOfKind = false;
-        while(i < cardValues.size() -1 && !isTwoOfKind){
+        while (i < cardValues.size() - 1 && !isTwoOfKind) {
             // If there exists another occurrence of this card value in hand
-            if(cardValues.lastIndexOf(cardValues.get(i)) != i) {
+            if (cardValues.lastIndexOf(cardValues.get(i)) != i) {
                 isTwoOfKind = true;
             }
 
@@ -49,30 +50,33 @@ public class Hand {
     }
 
     public boolean isStraight() {
+        // Any hand with two of a kind cannot be a straight
         if (isTwoOfKind())
             return false;
 
-        // Put cards in order
-        Arrays.sort(this.cards);
+        // Put hand in order
+        Arrays.sort(cards);
 
-        // Possible card values, in order
-        Card.CardValue cardValues[] = Card.CardValue.values();
+        // Possible card values, in order by default
+        ArrayList<CardValue> cardValues = new ArrayList<>(Arrays.asList(CardValue.values()));
 
-        // Find first cards values index
-        int i = 0;
-        int firstCardValueIndex = -1;
-        while(firstCardValueIndex < 0){
-            if (this.cards[0].getValue().equals(cardValues[i]))
-                firstCardValueIndex = i;
-            i++;
-        }
+        // Start index of possible straight
+        int firstCardValueIndex = cardValues.indexOf(cards[0].getValue());
 
-        // Verify that hand card values are consecutive
-        boolean isStraight = false;
-        for (int j = 1; j < this.cards.length; j++){
-            if (this.cards[j].getValue().equals(Card.CardValue.ACE))
-                continue;
-            isStraight = this.cards[j].getValue().equals(cardValues[j + firstCardValueIndex]);
+        // A straight can only exist if there are enough consecutive card values to include entire hand
+        boolean isStraight = cardValues.size() - firstCardValueIndex >= cards.length;
+
+        // Loop through cards in hand and check against cardValues order
+        int handIndex = 0;
+        while (isStraight && handIndex < cards.length) {
+            CardValue currentValue = cards[handIndex].getValue();
+
+            // Ignore Ace since it can be low or high
+            if (!currentValue.equals(CardValue.ACE))
+                isStraight = currentValue.equals(cardValues.get(handIndex + firstCardValueIndex));
+
+            // Move to next card
+            handIndex++;
         }
 
         return isStraight;
