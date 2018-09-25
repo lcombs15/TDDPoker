@@ -1,5 +1,6 @@
 package test;
 
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import main.Card;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -67,7 +68,37 @@ public class HandTest {
     }
 
     @Test void givenStraightHandWithoutAce_whenIsStraightCalled_thenTrue(){
-        SUT = new Hand("AS QD KC JH 10D");
+        SUT = new Hand("QD KC JH 10D 9S");
         assertTrue(SUT.isStraight());
+    }
+
+    @Test void givenStraightHandWithAceHigh_whenIsStraightCalled_thenTrue(){
+        SUT = new Hand("QD KC AS JH 10D");
+        assertTrue(SUT.isStraight());
+    }
+
+    @Test void givenStraightHandWithAceLow_whenIsStraightCalled_thenTrue(){
+        SUT = new Hand("4H 3H 2D AS 5C");
+        assertTrue(SUT.isStraight());
+    }
+
+    @Test void givenStraightHandWithAceHighAndLow_whenIsStraightCalled_thenFalse(){
+        SUT = new Hand("QD KD AS 2C 3H");
+        assertFalse(SUT.isStraight());
+    }
+
+    @Test void givenHandWithAllTenAndJack_whenIsStraightCalled_thenFalse(){
+        SUT = new Hand("10H 10C 10D JS JC");
+        assertFalse(SUT.isStraight());
+    }
+
+    @Test void givenHandWithAllAcesAndATwo_whenIsStraightCalled_thenFalse(){
+        SUT = new Hand("AS 2H AC AD AH");
+        assertFalse(SUT.isStraight());
+    }
+
+    @Test void givenHandWithATwoAThreeAndThreeAces_whenIsStraightCalled_thenFalse(){
+        SUT = new Hand("AS 2H AC AD 3H");
+        assertFalse(SUT.isStraight());
     }
 }

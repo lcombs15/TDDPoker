@@ -1,5 +1,6 @@
 package main;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -51,7 +52,7 @@ public class Hand {
         // Put cards in order
         Arrays.sort(this.cards);
 
-        // Possible card values
+        // Possible card values, in order
         Card.CardValue cardValues[] = Card.CardValue.values();
 
         // Find first cards values index
@@ -63,14 +64,11 @@ public class Hand {
             i++;
         }
 
-        // Make sure we have enough consecutive cards remaining
-        if (cardValues.length - firstCardValueIndex < this.cards.length){
-            return false;
-        }
-
         // Verify that hand card values are consecutive
         boolean isStraight = false;
         for (int j = 1; j < this.cards.length; j++){
+            if (this.cards[j].getValue().equals(Card.CardValue.ACE))
+                continue;
             isStraight = this.cards[j].getValue().equals(cardValues[j + firstCardValueIndex]);
         }
 
