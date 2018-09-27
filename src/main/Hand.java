@@ -52,25 +52,14 @@ public class Hand {
     }
 
     private int numPairs() {
-        // Populate list of all card values
-        ArrayList<CardValue> cardValues = new ArrayList();
+        int numPairs = 0;
 
-        for (Card cardInHand : cards)
-            cardValues.add(cardInHand.getValue());
-
-        // Loop through first n - 1 cards (card n has an obvious lastIndexOf)
-        int i = 0;
-        int pairs = 0;
-        while (i < cardValues.size() - 1) {
-            // If there exists another occurrence of this card value in hand
-            if (cardValues.lastIndexOf(cardValues.get(i)) != i) {
-                pairs++;
-            }
-
-            i++;
+        for(Integer count: cardMap.values()){
+            if (count.intValue() >= 2)
+                numPairs++;
         }
 
-        return pairs;
+        return numPairs;
     }
 
     public boolean isStraight() {
@@ -158,18 +147,6 @@ public class Hand {
     }
 
     private boolean isThreeOfKind() {
-        ArrayList<Integer> nums = new ArrayList<>();
-        boolean isThreeOfKind = false;
-        int i = 0;
-        while (!isThreeOfKind && i < cards.length - 2) {
-            int count = 1;
-            for (int j = i + 1; j < cards.length; j++) {
-                if (cards[j].getValue().equals(cards[i].getValue()))
-                    count++;
-            }
-            isThreeOfKind = count >= 3;
-            i++;
-        }
-        return isThreeOfKind;
+        return cardMap.values().contains(new Integer(3));
     }
 }
