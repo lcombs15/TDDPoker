@@ -4,6 +4,7 @@ import main.Card.CardValue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 
 public class Hand {
@@ -54,7 +55,7 @@ public class Hand {
     private int numPairs() {
         int numPairs = 0;
 
-        for(Integer count: cardMap.values()){
+        for (Integer count : cardMap.values()) {
             if (count.intValue() >= 2)
                 numPairs++;
         }
@@ -131,7 +132,9 @@ public class Hand {
     }
 
     public Score getScore() {
-        if (isFlush()) {
+        if (isFullHouse()) {
+            return Score.FullHouse;
+        } else if (isFlush()) {
             return Score.Flush;
         } else if (isStraight()) {
             return Score.Straight;
@@ -144,6 +147,11 @@ public class Hand {
         } else {
             return Score.HighCard;
         }
+    }
+
+    private boolean isFullHouse() {
+        Collection<Integer> vals = cardMap.values();
+        return vals.contains(new Integer(2)) && vals.contains(new Integer(3));
     }
 
     private boolean isThreeOfKind() {

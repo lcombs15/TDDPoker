@@ -166,13 +166,9 @@ public class HandTest {
     }
 
     @Test
-    void givenHandWithFullHouse_whenGetCardMap_thenReturnsCorrectTwoKeyMap() {
+    void givenHandWithFullHouse_whenCalledScore_thenReturnsFullHouse() {
         SUT = new Hand("2C 2D KH KS KC");
-
-        HashMap<Card.CardValue, Integer> cardMap = SUT.getCardMap();
-
-        assertEquals(2, cardMap.get(Card.CardValue.TWO).intValue());
-        assertEquals(3, cardMap.get(Card.CardValue.KING).intValue());
+        assertEquals(Hand.Score.FullHouse, SUT.getScore());
     }
 
 }
