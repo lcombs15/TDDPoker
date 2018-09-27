@@ -4,9 +4,11 @@ import main.Card.CardValue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class Hand {
-    Card cards[] = new Card[5];
+    private Card cards[] = new Card[5];
+    private HashMap<CardValue, Integer> cardMap = new HashMap<CardValue, Integer>();
 
     public Hand(String hand) {
         if (hand == null)
@@ -18,7 +20,21 @@ public class Hand {
             throw new IllegalArgumentException("Hand string must contain 5 cards. Given: " + hand);
 
         for (int i = 0; i < cardStrings.length; i++) {
-            this.cards[i] = new Card(cardStrings[i]);
+            Card cardToAdd = new Card(cardStrings[i]);
+
+            // Add card to hand
+            this.cards[i] = cardToAdd;
+
+            // Add card to map
+            CardValue currentValue = cardToAdd.getValue();
+
+            Integer currentMapValue = cardMap.get(currentValue);
+
+            if (currentMapValue == null) {
+                cardMap.put(currentValue, 1);
+            } else {
+                cardMap.replace(currentValue, currentMapValue + 1);
+            }
         }
     }
 
@@ -107,6 +123,10 @@ public class Hand {
         }
 
         return isFlush;
+    }
+
+    public HashMap<CardValue, Integer> getCardMap() {
+        return this.cardMap;
     }
 
     public enum Score {
