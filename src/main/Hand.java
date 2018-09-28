@@ -132,7 +132,9 @@ public class Hand {
     }
 
     public Score getScore() {
-        if (isFourOfKind()) {
+        if (isFlush() && isStraight()) {
+            return Score.StraightFlush;
+        } else if (isFourOfKind()) {
             return Score.FourOfKind;
         } else if (isFullHouse()) {
             return Score.FullHouse;

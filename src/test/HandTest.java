@@ -166,14 +166,20 @@ public class HandTest {
     }
 
     @Test
-    public void givenHandWithFullHouse_whenCalledScore_thenReturnsFullHouse() {
+    public void givenHandWithFullHouse_whenGetScoreCalled_thenReturnsFullHouse() {
         SUT = new Hand("2C 2D KH KS KC");
         assertEquals(Hand.Score.FullHouse, SUT.getScore());
     }
 
     @Test
-    public void givenHandWithFourOfKind_whenCalledScore_thenReturnsFourOfKind() {
+    public void givenHandWithFourOfKind_whenGetScoreCalled_thenReturnsFourOfKind() {
         SUT = new Hand("2C 3D 2H 2S 2D");
         assertEquals(Hand.Score.FourOfKind, SUT.getScore());
+    }
+
+    @Test
+    public void givenHandWithStraightFlush_whenGetScoreCalled_thenReturnsStraightFlush(){
+        SUT = new Hand("AS KS QS JS 10S");
+        assertEquals(Hand.Score.StraightFlush, SUT.getScore());
     }
 }
