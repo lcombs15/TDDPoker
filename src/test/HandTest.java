@@ -76,99 +76,98 @@ public class HandTest {
     }
 
     @Test
-    void givenStraightHandWithoutAce_whenIsStraightCalled_thenTrue() {
+    public void givenStraightHandWithoutAce_whenIsStraightCalled_thenTrue() {
         SUT = new Hand("QD KC JH 10D 9S");
         assertTrue(SUT.isStraight());
     }
 
     @Test
-    void givenStraightHandWithAceHigh_whenIsStraightCalled_thenTrue() {
+    public void givenStraightHandWithAceHigh_whenIsStraightCalled_thenTrue() {
         SUT = new Hand("QD KC AS JH 10D");
         assertTrue(SUT.isStraight());
     }
 
     @Test
-    void givenStraightHandWithAceLow_whenIsStraightCalled_thenTrue() {
+    public void givenStraightHandWithAceLow_whenIsStraightCalled_thenTrue() {
         SUT = new Hand("4H 3H 2D AS 5C");
         assertTrue(SUT.isStraight());
     }
 
     @Test
-    void givenStraightHandWithAceHighAndLow_whenIsStraightCalled_thenFalse() {
+    public void givenStraightHandWithAceHighAndLow_whenIsStraightCalled_thenFalse() {
         SUT = new Hand("QD KD AS 2C 3H");
         assertFalse(SUT.isStraight());
     }
 
     @Test
-    void givenHandWithAllTenAndJack_whenIsStraightCalled_thenFalse() {
+    public void givenHandWithAllTenAndJack_whenIsStraightCalled_thenFalse() {
         SUT = new Hand("10H 10C 10D JS JC");
         assertFalse(SUT.isStraight());
     }
 
     @Test
-    void givenHandWithAllAcesAndATwo_whenIsStraightCalled_thenFalse() {
+    public void givenHandWithAllAcesAndATwo_whenIsStraightCalled_thenFalse() {
         SUT = new Hand("AS 2H AC AD AH");
         assertFalse(SUT.isStraight());
     }
 
     @Test
-    void givenHandWithATwoAThreeAndThreeAces_whenIsStraightCalled_thenFalse() {
+    public void givenHandWithATwoAThreeAndThreeAces_whenIsStraightCalled_thenFalse() {
         SUT = new Hand("AS 2H AC AD 3H");
         assertFalse(SUT.isStraight());
     }
 
     @Test
-    void givenHandWithAllHearts_whenIsFlushCalled_thenTrue() {
+    public void givenHandWithAllHearts_whenIsFlushCalled_thenTrue() {
         SUT = new Hand("AH 2H KH 4H JH");
         assertTrue(SUT.isFlush());
     }
 
     @Test
-    void givenHandWithAllHeartsWithOneClub_whenIsFlushCalled_thenFalse() {
+    public void givenHandWithAllHeartsWithOneClub_whenIsFlushCalled_thenFalse() {
         SUT = new Hand("AH 2H KH 4H JC");
         assertFalse(SUT.isFlush());
     }
 
     @Test
-    void givenHandWithHighCardOnly_whenGetScoreCalled_thenReturnsHighCard() {
+    public void givenHandWithHighCardOnly_whenGetScoreCalled_thenReturnsHighCard() {
         SUT = new Hand("2D 3H 5D 6S KH");
         assertEquals(Hand.Score.HighCard, SUT.getScore());
     }
 
     @Test
-    void givenHandWithPairOnly_whenGetScoreCalled_thenReturnsPair() {
+    public void givenHandWithPairOnly_whenGetScoreCalled_thenReturnsPair() {
         SUT = new Hand("2D 2H 5D 6S KH");
         assertEquals(Hand.Score.Pair, SUT.getScore());
     }
 
     @Test
-    void givenHandWithTwoPairsOnly_whenGetScoreCalled_thenReturnsTwoPair() {
+    public void givenHandWithTwoPairsOnly_whenGetScoreCalled_thenReturnsTwoPair() {
         SUT = new Hand("2D 2H 5D 5S KH");
         assertEquals(Hand.Score.TwoPair, SUT.getScore());
     }
 
     @Test
-    void givenHandWithThreeOfKind_whenGetScoreCalled_thenReturnsThreeOfKind() {
+    public void givenHandWithThreeOfKind_whenGetScoreCalled_thenReturnsThreeOfKind() {
         SUT = new Hand("2D 2H 2C 5S KH");
         assertEquals(Hand.Score.ThreeOfKind, SUT.getScore());
     }
 
     @Test
-    void givenHandWithStraight_whenGetScoreCalled_thenReturnsStraight() {
+    public void givenHandWithStraight_whenGetScoreCalled_thenReturnsStraight() {
         SUT = new Hand("AS 2D 3C 4H 5D");
         assertEquals(Hand.Score.Straight, SUT.getScore());
     }
 
     @Test
-    void givenHandWithFlush_whenGetScoreCalled_thenReturnsFlush() {
+    public void givenHandWithFlush_whenGetScoreCalled_thenReturnsFlush() {
         SUT = new Hand("JH KH QH 5H 2H");
         assertEquals(Hand.Score.Flush, SUT.getScore());
     }
 
     @Test
-    void givenHandWithFullHouse_whenCalledScore_thenReturnsFullHouse() {
+    public void givenHandWithFullHouse_whenCalledScore_thenReturnsFullHouse() {
         SUT = new Hand("2C 2D KH KS KC");
         assertEquals(Hand.Score.FullHouse, SUT.getScore());
     }
-
 }
