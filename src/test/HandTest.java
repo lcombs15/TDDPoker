@@ -170,4 +170,10 @@ public class HandTest {
         SUT = new Hand("2C 2D KH KS KC");
         assertEquals(Hand.Score.FullHouse, SUT.getScore());
     }
+
+    @Test
+    public void givenHandWithFourOfKind_whenCalledScore_thenReturnsFourOfKind() {
+        SUT = new Hand("2C 3D 2H 2S 2D");
+        assertEquals(Hand.Score.FourOfKind, SUT.getScore());
+    }
 }

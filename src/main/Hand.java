@@ -132,7 +132,9 @@ public class Hand {
     }
 
     public Score getScore() {
-        if (isFullHouse()) {
+        if (isFourOfKind()) {
+            return Score.FourOfKind;
+        } else if (isFullHouse()) {
             return Score.FullHouse;
         } else if (isFlush()) {
             return Score.Flush;
@@ -151,10 +153,14 @@ public class Hand {
 
     private boolean isFullHouse() {
         Collection<Integer> vals = cardMap.values();
-        return vals.contains(new Integer(2)) && vals.contains(new Integer(3));
+        return vals.contains(2) && vals.contains(3);
     }
 
     private boolean isThreeOfKind() {
-        return cardMap.values().contains(new Integer(3));
+        return cardMap.values().contains(3);
+    }
+
+    private boolean isFourOfKind() {
+        return cardMap.values().contains(4);
     }
 }
