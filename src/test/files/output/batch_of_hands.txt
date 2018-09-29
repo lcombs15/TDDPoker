@@ -1,0 +1,4 @@
+2H 3D 5S 9C KD | 2C 3H 4S 8C AH --> Right wins: high card - Ace
+2H 4S 4C 2D 4H | 2S 8S AS QS 3S --> Right wins: Flush  
+2H 3D 5S 9C KD | 2C 3H 4S 8C KH --> Left wins: High Card - 9
+2H 3D 5S 9C KD | 2D 3H 5C 9S KH --> Tie
