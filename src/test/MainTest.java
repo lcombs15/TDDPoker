@@ -26,24 +26,24 @@ public class MainTest {
     @Test
     public void givenFileWithSingleGame_whenStraightVSFlush_thenOutputFileIsAsExpected() throws FileNotFoundException, IOException {
         Main SUT = new Main();
+        String FILE_NAME = "single_record_straight_vs_flush.txt";
 
-        String inputLocation = rootPath + "input/single_record_straight_vs_flush.txt";
+        String inputLocation = rootPath + "input/" + FILE_NAME;
 
         SUT.rankHandsInFile(inputLocation, outputFile.getPath());
 
-        String expected = "", result = "";
+        assertEquals(convertFileToString(new File(rootPath + "output/" + FILE_NAME)),convertFileToString(outputFile));
+    }
 
-        Scanner expectedScanner = new Scanner(new File(rootPath + "output/single_record_straight_vs_flush.txt"));
-        while(expectedScanner.hasNextLine()){
-            expected += expectedScanner.nextLine();
+    public String convertFileToString(File f) throws IOException{
+        String retVal = "";
+
+        Scanner scanner = new Scanner(f);
+        while(scanner.hasNextLine()){
+            retVal += scanner.nextLine();
         }
 
-        Scanner resultScanner = new Scanner(outputFile);
-        while(resultScanner.hasNextLine()){
-            result += resultScanner.nextLine();
-        }
-
-        assertEquals(expected,result);
+        return retVal;
     }
 
     @AfterAll
