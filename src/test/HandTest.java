@@ -202,4 +202,17 @@ public class HandTest {
         Hand other = new Hand("KH QD JS 10H 9S");
         assertEquals(1, SUT.compareTo(other));
     }
+
+    @Test
+    public void givenStraightY_whenWinningHandAgainstFlushX_thenReturnX(){
+        SUT = new Hand("AS KD QC JD 10H");
+        Hand opponent = new Hand("3H 2H 8H 10H JH");
+        assertEquals(opponent,SUT.winningHandAgainst(opponent));
+    }
+
+    @Test
+    public void givenStraight_whenWinningHandAgainstItSelf_thenReturnNull(){
+        SUT = new Hand("AS KD QC JD 10H");
+        assertNull(SUT.winningHandAgainst(SUT));
+    }
 }

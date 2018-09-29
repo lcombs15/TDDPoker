@@ -132,6 +132,16 @@ public class Hand implements Comparable<Hand> {
         }
     }
 
+    public Hand winningHandAgainst(Hand opponent) {
+        int result = this.compareTo(opponent);
+        // Tie: winning hand doesn't exist
+        if (result == 0) {
+            return null;
+        }
+
+        return result == 1 ? this : opponent;
+    }
+
     public enum Score {
         HighCard,
         Pair,
