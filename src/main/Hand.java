@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 
-public class Hand {
+public class Hand implements Comparable<Hand> {
     private Card cards[] = new Card[5];
     private HashMap<CardValue, Integer> cardMap = new HashMap<CardValue, Integer>();
 
@@ -117,6 +117,19 @@ public class Hand {
 
     public HashMap<CardValue, Integer> getCardMap() {
         return this.cardMap;
+    }
+
+    @Override
+    public int compareTo(Hand that) {
+        int result = this.getScore().compareTo(that.getScore());
+
+        if (result > 0) {
+            return 1;
+        } else if (result < 0) {
+            return -1;
+        } else {
+            return this.getHighCard().compareTo(that.getHighCard());
+        }
     }
 
     public enum Score {
