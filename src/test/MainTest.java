@@ -1,5 +1,6 @@
 package test;
 
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import main.Main;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,16 +12,20 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MainTest {
 
     private static String rootPath = Paths.get("").toAbsolutePath().toString() + "/src/test/files/";
     private static File outputFile = new File(rootPath + "temp/out.txt");
+    private Main SUT;
 
     @BeforeEach
     public void setup(){
         removeOutputFile();
+        SUT = new Main();
     }
 
     @Test
@@ -37,7 +42,6 @@ public class MainTest {
 
     @Test
     public void givenFileMultipleGames_whenMainStringArgsCalled_thenOutputFileIsAsExpected() throws FileNotFoundException, IOException {
-        Main SUT = new Main();
         String FILE_NAME = "batch_of_hands.txt";
 
         String inputLocation = rootPath + "input/" + FILE_NAME;
@@ -45,6 +49,17 @@ public class MainTest {
         SUT.main(new String[]{inputLocation, outputFile.getPath()});
 
         assertEquals(convertFileToString(new File(rootPath + "output/" + FILE_NAME)),convertFileToString(outputFile));
+    }
+
+    @Test
+    public void givenBadInputFile_whenMainStringArgsCalled_thenNoException() throws IOException{
+        String FILE_NAME = "bad_entry.txt";
+
+        String inputLocation = rootPath + "input/" + FILE_NAME;
+
+        assertDoesNotThrow(() -> {
+            SUT.main(new String[]{inputLocation, outputFile.getPath()});
+        });
     }
 
     public String convertFileToString(File f) throws IOException{
