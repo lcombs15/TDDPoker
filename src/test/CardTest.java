@@ -7,27 +7,27 @@ import main.Card;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CardTest {
-    Card SUD;
+    Card SUT;
 
     @BeforeEach
     void setUp() {
-        this.SUD = new Card("AH");
+        this.SUT = new Card("AH");
     }
 
     @Test
     void givenAce_whenGetValueCalled_returnsAce() {
-        assertEquals(SUD.getValue(), Card.CardValue.Ace);
+        assertEquals(SUT.getValue(), Card.CardValue.Ace);
     }
 
     @Test
     void givenHeartsSuit_whenGetSuitCalled_returnsHearts() {
-        assertEquals(SUD.getSuit(), Card.Suit.H);
+        assertEquals(SUT.getSuit(), Card.Suit.H);
     }
 
     @Test
     void givenInvalidCardStringFormat_whenPassedToConstructor_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> {
-            SUD = new Card("Ace of Spades");
+            SUT = new Card("Ace of Spades");
         });
     }
 
@@ -35,7 +35,7 @@ public class CardTest {
     void givenValidCardStringFormatWithInvalidCardValue_WhenPassedToConstructor_throwsIllegalArgumentException() {
         // The "One of hearts" doesn't exist
         assertThrows(IllegalArgumentException.class, () -> {
-            SUD = new Card("1H");
+            SUT = new Card("1H");
         });
     }
 
@@ -43,14 +43,14 @@ public class CardTest {
     void givenValidCardStringFormatWithInvalidSuit_WhenPassedToConstructor_throwsIllegalArgumentException() {
         // The "King of L's" doesn't exist
         assertThrows(IllegalArgumentException.class, () -> {
-            SUD = new Card("KL");
+            SUT = new Card("KL");
         });
     }
 
     @Test
     void givenAce_whenComparedToKing_thenAceGreaterThanKing() {
-        SUD = new Card("AS");
-        assertEquals(SUD.compareTo(new Card("KD")), 1);
+        SUT = new Card("AS");
+        assertEquals(SUT.compareTo(new Card("KD")), 1);
     }
 
 }
