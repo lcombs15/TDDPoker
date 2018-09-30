@@ -77,5 +77,8 @@ public class Main {
         }
         // Finished with output file
         output.close();
+
+        // Finished with input file
+        input.close();
     }
 }
