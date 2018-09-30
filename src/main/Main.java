@@ -1,7 +1,5 @@
 package main;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -9,7 +7,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String args[]) throws IOException{
+    public static void main(String args[]) throws IOException {
         if (args.length != 2) {
             System.out.println("Invalid # args: " + args.length + ".");
             System.out.println("Format: {path/to/input.txt} {path/to/output.txt}");
@@ -40,7 +38,7 @@ public class Main {
             Hand left, right;
             int split = line.indexOf("|");
 
-            if(split == -1){
+            if (split == -1) {
                 System.out.println("File format is invalid in: " + inputLocation);
                 return;
             }

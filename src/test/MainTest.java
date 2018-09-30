@@ -1,6 +1,5 @@
 package test;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import main.Main;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,7 +13,6 @@ import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MainTest {
 
@@ -23,7 +21,7 @@ public class MainTest {
     private Main SUT;
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         removeOutputFile();
         SUT = new Main();
     }
@@ -37,7 +35,7 @@ public class MainTest {
 
         SUT.main(new String[]{inputLocation, outputFile.getPath()});
 
-        assertEquals(convertFileToString(new File(rootPath + "output/" + FILE_NAME)),convertFileToString(outputFile));
+        assertEquals(convertFileToString(new File(rootPath + "output/" + FILE_NAME)), convertFileToString(outputFile));
     }
 
     @Test
@@ -48,11 +46,11 @@ public class MainTest {
 
         SUT.main(new String[]{inputLocation, outputFile.getPath()});
 
-        assertEquals(convertFileToString(new File(rootPath + "output/" + FILE_NAME)),convertFileToString(outputFile));
+        assertEquals(convertFileToString(new File(rootPath + "output/" + FILE_NAME)), convertFileToString(outputFile));
     }
 
     @Test
-    public void givenBadInputFile_whenMainStringArgsCalled_thenNoException() throws IOException{
+    public void givenBadInputFile_whenMainStringArgsCalled_thenNoException() throws IOException {
         String FILE_NAME = "bad_entry.txt";
 
         String inputLocation = rootPath + "input/" + FILE_NAME;
@@ -62,11 +60,11 @@ public class MainTest {
         });
     }
 
-    public String convertFileToString(File f) throws IOException{
+    public String convertFileToString(File f) throws IOException {
         String retVal = "";
 
         Scanner scanner = new Scanner(f);
-        while(scanner.hasNextLine()){
+        while (scanner.hasNextLine()) {
             retVal += scanner.nextLine();
             retVal += "\n";
         }
@@ -75,12 +73,12 @@ public class MainTest {
     }
 
     @AfterAll
-    public static void cleanup(){
+    public static void cleanup() {
         removeOutputFile();
     }
 
     private static void removeOutputFile() {
-        if(outputFile.exists()){
+        if (outputFile.exists()) {
             outputFile.delete();
         }
     }

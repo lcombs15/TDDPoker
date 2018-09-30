@@ -48,7 +48,7 @@ public class CardTest {
     }
 
     @Test
-    void givenAce_whenComparedToKing_thenAceGreaterThanKing(){
+    void givenAce_whenComparedToKing_thenAceGreaterThanKing() {
         SUD = new Card("AS");
         assertEquals(SUD.compareTo(new Card("KD")), 1);
     }
