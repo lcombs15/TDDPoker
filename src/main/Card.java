@@ -45,19 +45,19 @@ public class Card implements Comparable<Card> {
 
 
     public enum CardValue {
-        ACE("A"),
-        KING("K"),
-        QUEEN("Q"),
-        JACK("J"),
-        TEN("10"),
-        NINE("9"),
-        EIGHT("8"),
-        SEVEN("7"),
-        SIX("6"),
-        FIVE("5"),
-        FOUR("4"),
-        THREE("3"),
-        TWO("2");
+        Two("2"),
+        Three("3"),
+        Four("4"),
+        Five("5"),
+        Six("6"),
+        Seven("7"),
+        Eight("8"),
+        Nine("9"),
+        Ten("10"),
+        Jack("J"),
+        Queen("Q"),
+        King("K"),
+        Ace("A");
 
         // Store the above "A", "8", "K", ext.
         private String abbreviation;
@@ -67,7 +67,7 @@ public class Card implements Comparable<Card> {
             this.abbreviation = abbreviation;
         }
 
-        // Given "K" returns CardValue.KING
+        // Given "K" returns CardValue.King
         public static CardValue lookupByAbbreviation(String abbreviation) {
 
             // Loop through values, return as soon as match is found
