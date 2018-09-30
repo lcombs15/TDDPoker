@@ -35,7 +35,7 @@ public class Main {
             String line = input.nextLine().trim();
 
             // Skip blank lines in file
-            if(line.equals("")){
+            if (line.equals("")) {
                 continue;
             }
 
