@@ -31,22 +31,34 @@ public class Main {
         FileWriter output = new FileWriter(outputLocation);
 
         while (input.hasNext()) {
-            String line = input.nextLine();
+            // Grab & scrub next line
+            String line = input.nextLine().trim();
 
+            // Skip blank lines in file
+            if(line.equals("")){
+                continue;
+            }
+
+            // Copy line to output
             output.write(line);
 
             Hand left, right;
             int split = line.indexOf("|");
 
+            // Make sure file has the separator
             if (split == -1) {
                 System.out.println("File format is invalid in: " + inputLocation);
                 return;
             }
 
+            // Init hands
             left = new Hand(line.substring(0, split - 1).trim());
             right = new Hand(line.substring(split + 1).trim());
 
+            // Find winner
             Hand winner = left.winningHandAgainst(right);
+
+            // Prepare to write result to file
             output.write(" --> ");
 
             if (winner == null) {
@@ -55,12 +67,15 @@ public class Main {
                 output.write(winner == left ? "Left" : "Right");
                 output.write(" wins: " + winner.getScore());
 
+                // Handle special format for high card victor
                 if (winner.getScore().equals(Hand.Score.HighCard)) {
                     output.write(" - " + winner.getHighCard());
                 }
             }
+            // Print new line in file
             output.write(System.lineSeparator());
         }
+        // Finished with output file
         output.close();
     }
 }
