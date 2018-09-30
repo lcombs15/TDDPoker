@@ -16,7 +16,7 @@ public class CardTest {
 
     @Test
     void givenAce_whenGetValueCalled_returnsAce() {
-        assertEquals(SUD.getValue(), Card.CardValue.ACE);
+        assertEquals(SUD.getValue(), Card.CardValue.Ace);
     }
 
     @Test

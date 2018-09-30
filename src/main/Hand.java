@@ -86,7 +86,7 @@ public class Hand implements Comparable<Hand> {
             CardValue currentValue = cards[handIndex].getValue();
 
             // Ignore Ace since it can be low or high
-            if (!currentValue.equals(CardValue.ACE))
+            if (!currentValue.equals(CardValue.Ace))
                 isStraight = currentValue.equals(cardValues.get(handIndex + firstCardValueIndex));
 
             // Move to next card
@@ -143,15 +143,26 @@ public class Hand implements Comparable<Hand> {
     }
 
     public enum Score {
-        HighCard,
-        Pair,
-        TwoPair,
-        ThreeOfKind,
-        Straight,
-        Flush,
-        FullHouse,
-        FourOfKind,
-        StraightFlush
+        HighCard("High Card"),
+        Pair("Pair"),
+        TwoPair("Two Pair"),
+        ThreeOfKind("Three Of A Kind"),
+        Straight("Straight"),
+        Flush("Flush"),
+        FullHouse("Full House"),
+        FourOfKind("Four Of A Kind"),
+        StraightFlush("Straight Flush");
+
+        private String name;
+
+        Score(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String toString(){
+            return name;
+        }
     }
 
     public Score getScore() {

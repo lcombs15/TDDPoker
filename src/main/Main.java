@@ -62,8 +62,17 @@ public class Main {
 
             Hand winner = left.winningHandAgainst(right);
             output.write(" --> ");
-            output.write(winner == left ? "Left" : "Right");
-            output.write(" wins: " + winner.getScore().toString());
+
+            if (winner == null){
+                output.write("Tie");
+            }else{
+                output.write(winner == left ? "Left" : "Right");
+                output.write(" wins: " + winner.getScore());
+
+                if(winner.getScore().equals(Hand.Score.HighCard)){
+                    output.write(" - " + winner.getHighCard());
+                }
+            }
             output.write(System.lineSeparator());
         }
         output.close();

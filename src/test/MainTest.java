@@ -24,9 +24,21 @@ public class MainTest {
     }
 
     @Test
-    public void givenFileWithSingleGame_whenStraightVSFlush_thenOutputFileIsAsExpected() throws FileNotFoundException, IOException {
+    public void givenFileWithSingleGame_whenStraightVSFlushAndRankHandsInFileCalled_thenOutputFileIsAsExpected() throws FileNotFoundException, IOException {
         Main SUT = new Main();
         String FILE_NAME = "single_record_straight_vs_flush.txt";
+
+        String inputLocation = rootPath + "input/" + FILE_NAME;
+
+        SUT.rankHandsInFile(inputLocation, outputFile.getPath());
+
+        assertEquals(convertFileToString(new File(rootPath + "output/" + FILE_NAME)),convertFileToString(outputFile));
+    }
+
+    @Test
+    public void givenFileMultipleGames_whenRankHandsInFileCalled_thenOutputFileIsAsExpected() throws FileNotFoundException, IOException {
+        Main SUT = new Main();
+        String FILE_NAME = "batch_of_hands.txt";
 
         String inputLocation = rootPath + "input/" + FILE_NAME;
 
@@ -41,6 +53,7 @@ public class MainTest {
         Scanner scanner = new Scanner(f);
         while(scanner.hasNextLine()){
             retVal += scanner.nextLine();
+            retVal += "\n";
         }
 
         return retVal;
