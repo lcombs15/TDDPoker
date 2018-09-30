@@ -56,8 +56,7 @@ public class Hand implements Comparable<Hand> {
         int numPairs = 0;
 
         for (Integer count : cardMap.values()) {
-            if (count.intValue() >= 2)
-                numPairs++;
+            numPairs += count / 2;
         }
 
         return numPairs;
@@ -115,10 +114,6 @@ public class Hand implements Comparable<Hand> {
         return isFlush;
     }
 
-    public HashMap<CardValue, Integer> getCardMap() {
-        return this.cardMap;
-    }
-
     @Override
     public int compareTo(Hand that) {
         int result = this.getScore().compareTo(that.getScore());
@@ -134,6 +129,7 @@ public class Hand implements Comparable<Hand> {
 
     public Hand winningHandAgainst(Hand opponent) {
         int result = this.compareTo(opponent);
+
         // Tie: winning hand doesn't exist
         if (result == 0) {
             return null;
@@ -160,7 +156,7 @@ public class Hand implements Comparable<Hand> {
         }
 
         @Override
-        public String toString(){
+        public String toString() {
             return name;
         }
     }
