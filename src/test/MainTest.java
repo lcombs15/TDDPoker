@@ -1,17 +1,17 @@
 package test;
 
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import main.Main;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest {
 
@@ -19,30 +19,30 @@ public class MainTest {
     private static File outputFile = new File(rootPath + "temp/out.txt");
 
     @BeforeEach
-    public void setup() throws IOException{
+    public void setup(){
         removeOutputFile();
     }
 
     @Test
-    public void givenFileWithSingleGame_whenStraightVSFlushAndRankHandsInFileCalled_thenOutputFileIsAsExpected() throws FileNotFoundException, IOException {
+    public void givenFileWithSingleGame_whenMainStringArgsCalled_thenOutputFileIsAsExpected() throws FileNotFoundException, IOException {
         Main SUT = new Main();
         String FILE_NAME = "single_record_straight_vs_flush.txt";
 
         String inputLocation = rootPath + "input/" + FILE_NAME;
 
-        SUT.rankHandsInFile(inputLocation, outputFile.getPath());
+        SUT.main(new String[]{inputLocation, outputFile.getPath()});
 
         assertEquals(convertFileToString(new File(rootPath + "output/" + FILE_NAME)),convertFileToString(outputFile));
     }
 
     @Test
-    public void givenFileMultipleGames_whenRankHandsInFileCalled_thenOutputFileIsAsExpected() throws FileNotFoundException, IOException {
+    public void givenFileMultipleGames_whenMainStringArgsCalled_thenOutputFileIsAsExpected() throws FileNotFoundException, IOException {
         Main SUT = new Main();
         String FILE_NAME = "batch_of_hands.txt";
 
         String inputLocation = rootPath + "input/" + FILE_NAME;
 
-        SUT.rankHandsInFile(inputLocation, outputFile.getPath());
+        SUT.main(new String[]{inputLocation, outputFile.getPath()});
 
         assertEquals(convertFileToString(new File(rootPath + "output/" + FILE_NAME)),convertFileToString(outputFile));
     }
